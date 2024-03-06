@@ -2,35 +2,35 @@ import time
 import signal
 import socket
 
-def run_remote_server_R():
+def run_remote_server_C():
     sock_remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock_remote.bind(('137.110.40.114', 12345)) # TODO: replace with Ramin's IPv4 addr thru VPN
+    sock_remote.bind(('137.110.40.34', 54321)) # TODO: replace with Connor's IPv4 addr thru VPN
     sock_remote.listen()
     conn_remote, addr_remote = sock_remote.accept()
     with conn_remote:
-        print("before remote R")
+        print("before remote C")
         sock_pynq = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         time.sleep(0.0001)
-        sock_pynq.connect(('192.168.2.99', 12345))
+        sock_pynq.connect(('192.168.2.99', 54321))
         while True:
-            print("inside remote R")
+            print("inside remote C")
             time.sleep(0.0001)
             data_remote = conn_remote.recv(1024)
             if (data_remote.decode() == 'RGB'):
-                print("rgb remote R")
+                print("rgb remote C")
                 sock_pynq.sendall(b'RGB')
                 break
         while True:
             time.sleep(0.0001)
             data_remote = conn_remote.recv(1024)
             if (data_remote.decode() == 'disconnect'):
-                print("disconnect remote R")
+                print("disconnect remote C")
                 sock_pynq.sendall(b'disconnect')
                 break
         sock_pynq.close()
-    print("after remote R")
+    print("after remote C")
 
 if __name__ == '__main__':
     original_sigint = signal.getsignal(signal.SIGINT)
     signal.signal(signal.SIGINT, exit)
-    run_remote_server_R()
+    run_remote_server_C()

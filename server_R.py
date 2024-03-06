@@ -2,35 +2,35 @@ import time
 import signal
 import socket
 
-def run_server_C():
+def run_server_R():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.bind(('192.168.2.1', 12345))
+    sock.bind(('192.168.2.1', 54321))
     sock.listen()
     conn, addr = sock.accept()
     with conn:
-        print("before C")
+        print("before R")
         sock_remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         time.sleep(0.0001)
-        sock_remote.connect(('137.110.40.114', 12345)) # TODO: replace with Ramin's IPv4 addr thru VPN
+        sock_remote.connect(('137.110.40.34', 54321)) # TODO: replace with Connor's IPv4 addr thru VPN
         while True:
-            print("inside C")
+            print("inside R")
             time.sleep(0.0001)
             data = conn.recv(1024)               
             if (data.decode() == 'RGB'):
-                print("rgb C")
+                print("rgb R")
                 sock_remote.sendall(b'RGB')
                 break
         while True:
             time.sleep(0.0001)
             data = conn.recv(1024)               
             if (data.decode() == 'disconnect'):
-                print("disconnect C")
+                print("disconnect R")
                 sock_remote.sendall(b'disconnect')
                 break
         sock_remote.close()
-    print("after C")
+    print("after R")
 
 if __name__ == '__main__':
     original_sigint = signal.getsignal(signal.SIGINT)
     signal.signal(signal.SIGINT, exit)
-    run_server_C()
+    run_server_R()
