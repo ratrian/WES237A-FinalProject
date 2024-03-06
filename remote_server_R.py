@@ -14,12 +14,11 @@ def run_remote_server_R():
         sock_pynq.connect(('192.168.2.99', 12345))
         while True:
             time.sleep(0.0001)
-            data_remote = conn_remote.recv(1024)
-            if (data_remote.decode() == 'disconnect'):
-                print("disconnect remote R")
-                sock_pynq.sendall(b'disconnect')
-                break
+            data_remote = conn_remote.recv(1)
             sock_pynq.sendall(data_remote)
+            if (int(data_remote.decode()) == 4):
+                print("disconnect remote R")
+                break
         sock_pynq.close()
     print("after remote R")
 

@@ -14,12 +14,11 @@ def run_server_C():
         sock_remote.connect(('137.110.32.55', 12345)) # TODO: replace with Ramin's IPv4 addr thru VPN
         while True:
             time.sleep(0.0001)
-            data = conn.recv(1024)               
-            if (data.decode() == 'disconnect'):
-                print("disconnect C")
-                sock_remote.sendall(b'disconnect')
-                break
+            data = conn.recv(1)
             sock_remote.sendall(data)
+            if (int(data.decode()) == 4):
+                print("disconnect C")
+                break
         sock_remote.close()
     print("after C")
 
