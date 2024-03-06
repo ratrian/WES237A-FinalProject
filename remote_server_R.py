@@ -4,7 +4,7 @@ import socket
 
 def run_remote_server_R():
     sock_remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock_remote.bind(('137.110.40.114', 12345)) # TODO: replace with Ramin's IPv4 addr thru VPN
+    sock_remote.bind(('137.110.32.55', 12345)) # TODO: replace with Ramin's IPv4 addr thru VPN
     sock_remote.listen()
     conn_remote, addr_remote = sock_remote.accept()
     with conn_remote:

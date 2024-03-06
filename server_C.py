@@ -11,7 +11,7 @@ def run_server_C():
         print("before C")
         sock_remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         time.sleep(0.0001)
-        sock_remote.connect(('137.110.40.114', 12345)) # TODO: replace with Ramin's IPv4 addr thru VPN
+        sock_remote.connect(('137.110.32.55', 12345)) # TODO: replace with Ramin's IPv4 addr thru VPN
         while True:
             time.sleep(0.0001)
             data = conn.recv(1024)               
