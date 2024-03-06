@@ -12,13 +12,13 @@ def run_remote_server_R():
         sock_pynq = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         time.sleep(0.0001)
         sock_pynq.connect(('192.168.2.99', 12345))
-        while True:
+        while True: # TODO: replace with function to regularly send corresponding input to pynq_server_R
             print("inside remote R")
             time.sleep(0.0001)
             data_remote = conn_remote.recv(1024)
             if (data_remote.decode() == 'RGB'):
                 print("rgb remote R")
-                sock_pynq.sendall(b'rgb')
+                sock_pynq.sendall(b'RGB')
                 break
         while True:
             time.sleep(0.0001)

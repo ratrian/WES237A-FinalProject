@@ -16,13 +16,6 @@ def run_remote_server_C():
             print("inside remote C")
             time.sleep(0.0001)
             data_remote = conn_remote.recv(1024)
-            if (data_remote.decode() == 'RGB'):
-                print("rgb remote C")
-                sock_pynq.sendall(b'rgb')
-                break
-        while True:
-            time.sleep(0.0001)
-            data_remote = conn_remote.recv(1024)
             if (data_remote.decode() == 'disconnect'):
                 print("disconnect remote C")
                 sock_pynq.sendall(b'disconnect')

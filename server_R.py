@@ -16,13 +16,6 @@ def run_server_R():
             print("inside R")
             time.sleep(0.0001)
             data = conn.recv(1024)               
-            if (data.decode() == 'RGB'):
-                print("rgb R")
-                sock_remote.sendall(b'RGB')
-                break
-        while True:
-            time.sleep(0.0001)
-            data = conn.recv(1024)               
             if (data.decode() == 'disconnect'):
                 print("disconnect R")
                 sock_remote.sendall(b'disconnect')

@@ -12,7 +12,7 @@ def run_server_C():
         sock_remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         time.sleep(0.0001)
         sock_remote.connect(('137.110.40.114', 12345)) # TODO: replace with Ramin's IPv4 addr thru VPN
-        while True:
+        while True: # TODO: replace with function to regularly send corresponding input to remote_server_R
             print("inside C")
             time.sleep(0.0001)
             data = conn.recv(1024)               
