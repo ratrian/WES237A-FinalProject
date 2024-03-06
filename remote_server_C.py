@@ -4,7 +4,7 @@ import socket
 
 def run_remote_server_C():
     sock_remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock_remote.bind(('127.0.0.1', 54321)) # TODO: replace with Connor's IPv4 addr thru VPN
+    sock_remote.bind(('137.110.40.34', 54321)) # TODO: replace with Connor's IPv4 addr thru VPN
     sock_remote.listen()
     conn_remote, addr_remote = sock_remote.accept()
     with conn_remote:
@@ -14,6 +14,13 @@ def run_remote_server_C():
         sock_pynq.connect(('192.168.2.99', 54321))
         while True:
             print("inside remote C")
+            time.sleep(0.0001)
+            data_remote = conn_remote.recv(1024)
+            if (data_remote.decode() == 'RGB'):
+                print("rgb remote C")
+                sock_pynq.sendall(b'rgb')
+                break
+        while True:
             time.sleep(0.0001)
             data_remote = conn_remote.recv(1024)
             if (data_remote.decode() == 'disconnect'):
