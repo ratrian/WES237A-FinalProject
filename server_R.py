@@ -11,15 +11,7 @@ def run_server_R():
         print("before R")
         sock_remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         time.sleep(0.0001)
-        sock_remote.connect(('137.110.40.34', 54321)) # TODO: replace with Connor's IPv4 addr thru VPN
-        while True:
-            print("inside R")
-            time.sleep(0.0001)
-            data = conn.recv(1024)               
-            if (data.decode() == 'RGB'):
-                print("rgb R")
-                sock_remote.sendall(b'RGB')
-                break
+        sock_remote.connect(('127.0.0.1', 54321)) # TODO: replace with Connor's IPv4 addr thru VPN
         while True:
             time.sleep(0.0001)
             data = conn.recv(1024)               
@@ -27,6 +19,15 @@ def run_server_R():
                 print("disconnect R")
                 sock_remote.sendall(b'disconnect')
                 break
+            elif (data.decode() == 'blue'):
+                print("blue R")
+                sock_remote.sendall(b'blue')
+            elif (data.decode() == 'green'):
+                print("green R")
+                sock_remote.sendall(b'green')
+            elif (data.decode() == 'red'):
+                print("red R")
+                sock_remote.sendall(b'red')
         sock_remote.close()
     print("after R")
 
