@@ -11,7 +11,7 @@ def run_server_R():
         print("before R")
         sock_remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         time.sleep(0.0001)
-        sock_remote.connect(('127.0.0.1', 54321)) # TODO: replace with Connor's IPv4 addr thru VPN
+        sock_remote.connect(('137.110.33.228', 54321)) # TODO: replace with Connor's IPv4 addr thru VPN
         while True:
             time.sleep(0.0001)
             data = conn.recv(1024)               

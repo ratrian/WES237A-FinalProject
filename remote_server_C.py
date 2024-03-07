@@ -4,7 +4,7 @@ import socket
 
 def run_remote_server_C():
     sock_remote = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock_remote.bind(('127.0.0.1', 54321)) # TODO: replace with Connor's IPv4 addr thru VPN
+    sock_remote.bind(('137.110.33.228', 54321)) # TODO: replace with Connor's IPv4 addr thru VPN
     sock_remote.listen()
     conn_remote, addr_remote = sock_remote.accept()
     with conn_remote:
